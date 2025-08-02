@@ -32,11 +32,19 @@ defmodule PlausibleProxy.Plug do
         ...
 
         plug PlausibleProxy.Plug,
-          event_callback_fn: fn _, _, _ -> {:ok, %{props: %{"site" => "mysite.com"}}},
+          event_callback_fn: &MyApp.Analytics.event_callback/3,
           remote_ip_headers: ["x-myhosting-remote-ip"],
           script_extension: "script.pageview-props.js"
 
         ...
+      end
+
+  Where `MyApp.Analytics.event_callback/3` would be defined as:
+
+      defmodule MyApp.Analytics do
+        def event_callback(_conn, _payload, _remote_ip) do
+          {:ok, %{props: %{"site" => "mysite.com"}}}
+        end
       end
 
   """
