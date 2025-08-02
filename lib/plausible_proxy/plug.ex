@@ -57,12 +57,12 @@ defmodule PlausibleProxy.Plug do
   @default_script_extension "script.js"
   @default_remote_ip_headers ["fly-client-ip", "x-real-ip"]
 
-  defp default_event_callback(_conn, _payload, _remote_ip), do: {:ok, %{}}
+  def default_event_callback(_conn, _payload, _remote_ip), do: {:ok, %{}}
 
   @impl Plug
   def init(opts) do
     %{
-      event_callback_fn: Keyword.get(opts, :event_callback_fn, &default_event_callback/3),
+      event_callback_fn: Keyword.get(opts, :event_callback_fn, &__MODULE__.default_event_callback/3),
       local_path: Keyword.get(opts, :local_path, @default_local_path),
       script_extension: Keyword.get(opts, :script_extension, @default_script_extension),
       remote_ip_headers: Keyword.get(opts, :remote_ip_headers, @default_remote_ip_headers)
