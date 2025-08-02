@@ -5,7 +5,7 @@ defmodule PlausibleProxy.MixProject do
     [
       app: :plausible_proxy,
       version: "0.1.1",
-      elixir: "~> 1.14",
+      elixir: "~> 1.18",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -50,10 +50,10 @@ defmodule PlausibleProxy.MixProject do
 
   defp deps do
     [
-      {:plug, "~> 1.11"},
-      {:httpoison, "~> 2.1"},
+      {:plug, "~> 1.18"},
+      {:httpoison, "~> 2.2"},
       {:jason, "~> 1.4"},
-      {:ex_doc, "~> 0.30.5", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.38", only: :dev, runtime: false}
     ]
   end
 end
